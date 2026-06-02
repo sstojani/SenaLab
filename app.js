@@ -1112,15 +1112,16 @@ const loginAttemptKey = "senaLab.loginAttempts";
 const LOGIN_MAX        = 5;
 const LOGIN_LOCKOUT_MS = 30_000;
 
+// Uses localStorage so the lockout persists across tabs and windows
 function getLoginAttempts() {
-  try { return JSON.parse(sessionStorage.getItem(loginAttemptKey)) || { count: 0, lockedUntil: 0 }; }
+  try { return JSON.parse(localStorage.getItem(loginAttemptKey)) || { count: 0, lockedUntil: 0 }; }
   catch { return { count: 0, lockedUntil: 0 }; }
 }
 function setLoginAttempts(data) {
-  sessionStorage.setItem(loginAttemptKey, JSON.stringify(data));
+  localStorage.setItem(loginAttemptKey, JSON.stringify(data));
 }
 function resetLoginAttempts() {
-  sessionStorage.removeItem(loginAttemptKey);
+  localStorage.removeItem(loginAttemptKey);
 }
 
 elements.loginForm.addEventListener("submit", async (event) => {
@@ -1169,7 +1170,7 @@ elements.loginForm.addEventListener("submit", async (event) => {
     });
     elements.loginMessage.textContent = locked
       ? `Too many failed attempts. Wait ${LOGIN_LOCKOUT_MS / 1000}s.`
-      : `Error: ${err.message}`;
+      : `Incorrect email or password.`;
   } finally {
     if (btn) { btn.classList.remove("loading"); btn.disabled = false; }
   }
@@ -1198,8 +1199,37 @@ elements.logoutButton.addEventListener("click", async () => {
   window.location.hash = "home";
 });
 
+// Lookup rate limiting — prevents code enumeration attacks
+const lookupKey      = "senaLab.lookups";
+const LOOKUP_MAX     = 10;
+const LOOKUP_WAIT_MS = 60_000; // 1 minute
+
+function getLookups() {
+  try { return JSON.parse(localStorage.getItem(lookupKey)) || { count: 0, resetAt: 0 }; }
+  catch { return { count: 0, resetAt: 0 }; }
+}
+
 elements.lookupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const now  = Date.now();
+  const data = getLookups();
+
+  // Reset the window if 1 minute has passed
+  if (now > data.resetAt) {
+    data.count   = 0;
+    data.resetAt = now + LOOKUP_WAIT_MS;
+  }
+
+  if (data.count >= LOOKUP_MAX) {
+    const wait = Math.ceil((data.resetAt - now) / 1000);
+    elements.lookupMessage.textContent = `Too many lookups. Please wait ${wait}s.`;
+    return;
+  }
+
+  data.count++;
+  localStorage.setItem(lookupKey, JSON.stringify(data));
+
   await openPatientResultByCode(elements.lookupCode.value);
 });
 

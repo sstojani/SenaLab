@@ -56,26 +56,63 @@
       frame-ancestors 'none';
     """
 
-# ─── Block access to internal / tool directories ─────────────
-[[headers]]
-  for = "/.claude/*"
-  [headers.values]
-    X-Robots-Tag = "noindex"
+# ─── Block non-web files from public access ──────────────────
+[[redirects]]
+  from = "/.claude/*"
+  to = "/404.html"
+  status = 404
+  force = true
 
 [[redirects]]
-  from   = "/.claude/*"
-  to     = "/404.html"
+  from = "/schema.sql"
+  to = "/404.html"
   status = 404
-  force  = true
+  force = true
 
 [[redirects]]
-  from   = "/server.js"
-  to     = "/404.html"
+  from = "/SETUP.md"
+  to = "/404.html"
   status = 404
-  force  = true
+  force = true
 
 [[redirects]]
-  from   = "/*.bat"
-  to     = "/404.html"
+  from = "/build.js"
+  to = "/404.html"
   status = 404
-  force  = true
+  force = true
+
+[[redirects]]
+  from = "/server.js"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.bat"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.sql"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
