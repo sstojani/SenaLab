@@ -49,11 +49,14 @@
     Content-Security-Policy = """
       default-src 'none';
       script-src  'self' https://cdn.jsdelivr.net;
+      script-src-attr 'none';
       style-src   'self' 'unsafe-inline' https://fonts.googleapis.com;
       font-src    https://fonts.gstatic.com;
       img-src     'self' data: https://api.qrserver.com;
       connect-src 'self' https://*.supabase.co https://*.supabase.in;
       frame-ancestors 'none';
+      base-uri    'self';
+      form-action 'self';
     """
 
 # ─── Block non-web files from public access ──────────────────

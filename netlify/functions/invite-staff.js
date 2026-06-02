@@ -14,7 +14,7 @@ const { createClient } = require('@supabase/supabase-js');
 exports.handler = async (event) => {
   const headers = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://sena-lab.netlify.app',
   };
 
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers };
