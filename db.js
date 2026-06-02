@@ -136,7 +136,7 @@
         id, name, dob, phone, doctor, sample_date, status, notes,
         test_results ( id, test_name, value, unit, reference_range, display_order )
       `)
-      .eq('id', code.trim().toUpperCase())
+      .eq('id', code.trim())
       .eq('status', 'Published')
       .single();
     if (error || !data) return null;

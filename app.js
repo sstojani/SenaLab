@@ -247,7 +247,7 @@ function updateLookupHint() {
 }
 
 async function openPatientResultByCode(code) {
-  const normalizedCode = String(code || "").trim().toUpperCase();
+  const normalizedCode = String(code || "").trim();
   if (!normalizedCode) return;
 
   elements.lookupMessage.textContent = "Looking up your results…";
