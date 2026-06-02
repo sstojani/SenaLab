@@ -5,8 +5,9 @@
 
 [build]
   publish = "."
-  # npm install runs automatically because package.json is present.
-  # This makes @supabase/supabase-js available to the serverless functions.
+  # Generates config.js from SUPABASE_URL + SUPABASE_ANON_KEY env vars.
+  # Never commit real credentials — they live in Netlify env vars only.
+  command = "node build.js"
 
 [functions]
   directory = "netlify/functions"
