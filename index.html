@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sena Lab | Results Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <!-- Particle canvas background -->
+    <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- ─── TOPBAR ─────────────────────────────────────────────── -->
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Sena Lab home">
+        <div class="brand-mark">SL</div>
+        <span class="brand-text">
+          <strong>Sena Lab</strong>
+          <small>Clinical laboratory</small>
+        </span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#results">Get results</a>
+        <a class="staff-link is-hidden" href="#workspace" data-auth-only>Workspace</a>
+        <a class="staff-link is-hidden" href="#records" data-auth-only>Records</a>
+        <a class="staff-link is-hidden" href="#personnel" data-admin-only>Personnel</a>
+        <a class="staff-link is-hidden" href="#settings" data-admin-only>Settings</a>
+      </nav>
+
+      <div class="auth-actions">
+        <a class="btn btn-outline magnetic" id="loginNav" href="#login" data-guest-only>Staff login</a>
+        <div class="user-menu is-hidden" id="userMenu">
+          <button class="avatar-btn" id="userMenuButton" type="button" aria-expanded="false">
+            <span class="avatar-circle" id="userAvatar">A</span>
+            <span id="userName">Admin</span>
+          </button>
+          <div class="dropdown compact" id="userDropdown">
+            <button type="button" id="logoutButton">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ─── HERO ─────────────────────────────────────────────── -->
+      <section id="home" class="hero route-public">
+        <div class="hero-layout">
+
+          <!-- Left: text -->
+          <div class="hero-text">
+            <div class="hero-badge">
+              <span class="badge-pulse"></span>
+              Qazim Murtini · Librazhd, Albania
+            </div>
+            <h1 class="hero-h1">
+              <span>Diagnostics</span>
+              <span class="h1-accent">that care.</span>
+            </h1>
+            <p class="hero-p">
+              Patients get results online with a private code. Staff manage records, tests, and reports from a protected workspace — all in one place.
+            </p>
+            <div class="hero-ctas">
+              <a class="btn btn-primary magnetic" href="#results">Check my results</a>
+              <a class="btn btn-ghost magnetic" href="#login" data-guest-only>Staff portal <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- Right: 3D fluid orb (Three.js) -->
+          <div class="hero-canvas-wrap" aria-hidden="true">
+            <canvas id="fluidCanvas"></canvas>
+            <div class="fluid-bloom"></div>
+          </div>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-val" id="metricPatients">0</span>
+            <span class="stat-lbl">patients registered</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="hero-stat">
+            <span class="stat-val" id="metricTests">0</span>
+            <span class="stat-lbl">test results saved</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="hero-stat">
+            <span class="stat-val">24h</span>
+            <span class="stat-lbl">typical turnaround</span>
+          </div>
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="scroll-cue" aria-hidden="true">
+          <span>scroll</span>
+          <div class="scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- ─── SERVICES ──────────────────────────────────────────── -->
+      <section id="services" class="services-section route-public">
+        <div class="section-intro">
+          <p class="eyebrow reveal-up">What we offer</p>
+          <h2 class="reveal-up" style="--delay:80ms">
+            Clinical <em class="gradient-em">excellence</em><br/>in every test
+          </h2>
+        </div>
+
+        <div class="bento">
+          <article class="bento-card wide tilt-card reveal-up" style="--delay:0ms"><!-- Blood -->
+            <div class="card-top-line"></div>
+            <div class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2c-3.5 4.5-6 8-6 11.5a6 6 0 0 0 12 0C18 10 15.5 6.5 12 2z"/>
+                <path d="M8.5 15.5a3.5 3.5 0 0 0 3.5 2"/>
+              </svg>
+            </div>
+            <h3>Blood analysis</h3>
+            <p>Complete blood count, hemoglobin, erythrocytes, platelets, glucose, and inflammation markers.</p>
+            <div class="card-shimmer"></div>
+          </article>
+
+          <article class="bento-card tilt-card reveal-up" style="--delay:150ms">
+            <div class="card-top-line"></div>
+            <div class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 2h4M10 2v5.5L5 15a4 4 0 0 0 0 4h14a4 4 0 0 0 0-4l-5-7.5V2"/>
+                <path d="M7 15h10"/>
+              </svg>
+            </div>
+            <h3>Biochemistry</h3>
+            <p>Cholesterol, triglycerides, liver markers, kidney markers, electrolytes, and diabetes monitoring.</p>
+            <div class="card-shimmer"></div>
+          </article>
+
+          <article class="bento-card tilt-card reveal-up" style="--delay:300ms">
+            <div class="card-top-line"></div>
+            <div class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="2 12 6 12 9 3 15 21 18 12 22 12"/>
+              </svg>
+            </div>
+            <h3>Hormones</h3>
+            <p>Thyroid, reproductive hormones, vitamin D, insulin, and other requested profiles.</p>
+            <div class="card-shimmer"></div>
+          </article>
+
+          <article class="bento-card wide tilt-card reveal-up" style="--delay:450ms">
+            <div class="card-top-line"></div>
+            <div class="svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="14" cy="10" r="4"/>
+                <path d="M14 6V2M12 2h4M10 10H6M6 18h12M10 14v4M14 14v4"/>
+              </svg>
+            </div>
+            <h3>Microbiology</h3>
+            <p>Urine culture, throat swabs, antibiograms, and infection screening workflows.</p>
+            <div class="card-shimmer"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ─── RESULTS LOOKUP ────────────────────────────────────── -->
+      <section id="results" class="results-section route-public">
+        <div class="results-bg-text" aria-hidden="true">RESULTS</div>
+        <div class="results-layout">
+          <div class="results-left reveal-left">
+            <p class="eyebrow">Patient portal</p>
+            <h2>Your results,<br/><span class="gradient-em">instantly.</span></h2>
+            <p class="results-sub">Enter the unique code from your visit. No account needed — your results are ready and waiting.</p>
+          </div>
+          <div class="results-right reveal-right" style="--delay:100ms">
+            <form class="lookup-form" id="lookupForm">
+              <label class="lookup-label" for="lookupCode">Result code</label>
+              <div class="lookup-row">
+                <input id="lookupCode" name="lookupCode" placeholder="Enter your result code…" autocomplete="off" />
+                <button class="btn btn-primary" type="submit">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+              <p class="form-note" id="lookupMessage">Enter the unique code from your lab visit report.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patient result panel -->
+      <section class="patient-result-section route-public is-hidden" id="patientResult">
+        <div class="panel preview-panel">
+          <div class="panel-title">
+            <h3>Published result</h3>
+            <div class="panel-actions">
+              <button class="btn btn-outline" id="savePatientPdf" type="button">Save PDF</button>
+              <button class="btn btn-outline" id="printPatientReport" type="button">Print</button>
+            </div>
+          </div>
+          <div class="report" id="patientReportPreview"></div>
+        </div>
+      </section>
+
+      <!-- ─── LOGIN ─────────────────────────────────────────────── -->
+      <section id="login" class="login-section route-view">
+        <div class="login-left">
+          <div class="login-brand reveal-up">
+            <div class="brand-mark large">SL</div>
+            <div class="login-brand-text">
+              <strong>Sena Lab</strong>
+              <small>Clinical laboratory</small>
+            </div>
+          </div>
+          <div class="login-visual-text">
+            <p class="eyebrow reveal-up" style="--delay:100ms">Protected staff area</p>
+            <h2 class="login-h2 reveal-up" style="--delay:180ms">Staff<br/><span class="gradient-em">workspace.</span></h2>
+            <p class="login-sub reveal-up" style="--delay:260ms">
+              Access is restricted to authorised laboratory staff only.
+            </p>
+          </div>
+          <!-- Decorative molecule canvas for login -->
+          <canvas id="loginCanvas" class="login-canvas" aria-hidden="true"></canvas>
+        </div>
+
+        <div class="login-right">
+          <form class="login-card reveal-up" id="loginForm">
+            <div class="login-card-head">
+              <h3>Sign in</h3>
+              <span class="badge-tag">Sena Lab CRM</span>
+            </div>
+            <label class="field-label">
+              Email
+              <input id="loginEmail" type="email" required placeholder="your@email.com" autocomplete="username" />
+            </label>
+            <label class="field-label">
+              Password
+              <input id="loginPassword" type="password" required placeholder="Enter password" autocomplete="current-password" />
+            </label>
+            <button class="btn btn-primary full magnetic" type="submit">
+              <span class="btn-text">Sign in</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form-note" id="loginMessage">Staff tabs appear after login.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ─── WORKSPACE ─────────────────────────────────────────── -->
+      <section id="workspace" class="workspace staff-area route-view is-hidden" data-auth-only>
+        <div class="ws-header">
+          <p class="eyebrow">Lab workspace</p>
+          <h2>Patient &amp; result management</h2>
+        </div>
+
+        <div class="ws-grid">
+          <!-- Patient form -->
+          <form class="panel" id="patientForm">
+            <div class="panel-title">
+              <h3>Patient details</h3>
+              <span id="activeCode">New record</span>
+            </div>
+            <div class="field-grid">
+              <label class="field-label">Full name<input id="patientName" required placeholder="Patient name" /></label>
+              <label class="field-label">Date of birth<input id="patientDob" type="date" required /></label>
+              <label class="field-label">Phone<input id="patientPhone" placeholder="+355 ..." /></label>
+              <label class="field-label">Doctor<input id="patientDoctor" placeholder="Referring doctor" /></label>
+              <label class="field-label">Sample date<input id="sampleDate" type="date" required /></label>
+              <label class="field-label">Status
+                <select id="reportStatus">
+                  <option>Draft</option>
+                  <option>Published</option>
+                  <option>Needs review</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="test-entry">
+              <h4>Add test result</h4>
+              <div class="test-grid">
+                <label class="field-label">Test
+                  <input id="testName" list="testCatalog" placeholder="Type hem…" autocomplete="off" />
+                  <datalist id="testCatalog"></datalist>
+                </label>
+                <label class="field-label">Value<input id="testValue" placeholder="Result" /></label>
+                <label class="field-label">Unit<input id="testUnit" placeholder="Unit" /></label>
+                <label class="field-label">Range<input id="testRange" placeholder="Ref. range" /></label>
+                <button class="btn-add" id="addTest" type="button" aria-label="Add test">+</button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Test</th><th>Value</th><th>Unit</th><th>Range</th><th></th></tr></thead>
+                <tbody id="testsBody"></tbody>
+              </table>
+            </div>
+
+            <label class="field-label">Notes
+              <textarea id="reportNotes" rows="3" placeholder="Internal or patient-facing notes"></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="btn btn-primary magnetic" type="submit">Save report</button>
+              <button class="btn btn-outline" id="newRecord" type="button">New patient</button>
+            </div>
+          </form>
+
+          <!-- Records panel -->
+          <aside class="panel records-panel">
+            <div class="panel-title">
+              <h3>Records</h3>
+              <button class="text-btn" id="seedData" type="button">Reset sample</button>
+            </div>
+            <div class="record-list" id="recordList"></div>
+            <a class="btn btn-outline full mt is-hidden" id="viewAllRecords" href="#records">View all records</a>
+          </aside>
+
+          <!-- Report preview -->
+          <section class="panel preview-panel" aria-live="polite">
+            <div class="panel-title">
+              <h3>Report preview</h3>
+              <div class="panel-actions">
+                <button class="btn btn-outline" id="savePdf" type="button">Save PDF</button>
+                <button class="btn btn-outline" id="printReport" type="button">Print</button>
+              </div>
+            </div>
+            <div class="report" id="reportPreview"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ─── RECORDS ───────────────────────────────────────────── -->
+      <section id="records" class="workspace staff-area route-view is-hidden" data-auth-only>
+        <div class="ws-header">
+          <p class="eyebrow">Lab archive</p>
+          <h2>All patient records</h2>
+        </div>
+        <section class="panel">
+          <div class="panel-title">
+            <h3>Past tests</h3>
+            <a class="btn btn-primary" href="#workspace">Add new patient</a>
+          </div>
+          <div class="table-wrap">
+            <table class="records-table">
+              <thead><tr><th>Patient</th><th>Code</th><th>Sample date</th><th>Status</th><th>Tests</th><th>Actions</th></tr></thead>
+              <tbody id="allRecordsBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <!-- ─── PERSONNEL ─────────────────────────────────────────── -->
+      <section id="personnel" class="workspace admin-area route-view is-hidden" data-admin-only>
+        <div class="ws-header">
+          <p class="eyebrow">Administration</p>
+          <h2>Personnel access</h2>
+        </div>
+        <div class="personnel-grid">
+          <section class="panel">
+            <div class="panel-title">
+              <h3>Users</h3>
+              <button class="btn btn-outline" id="showAddUser" type="button">Add user</button>
+            </div>
+            <div class="table-wrap">
+              <table class="users-table">
+                <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+                <tbody id="personList"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <form class="panel user-form is-hidden" id="userForm">
+            <div class="panel-title">
+              <h3 id="userFormTitle">Add user</h3>
+              <span id="editingUserLabel">New personnel</span>
+            </div>
+            <input id="editingUserId" type="hidden" />
+            <label class="field-label">Name<input id="userFirstName" required placeholder="First name" /></label>
+            <label class="field-label">Last name<input id="userLastName" required placeholder="Last name" /></label>
+            <label class="field-label">Email<input id="userEmail" type="email" required placeholder="name@senalab.local" /></label>
+            <label class="field-label">Password<input id="userPassword" type="password" required placeholder="Password" /></label>
+            <label class="field-label">Role
+              <select id="userRole">
+                <option value="laburant">Laburant</option>
+                <option value="admin">Admin</option>
+              </select>
+            </label>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Save user</button>
+              <button class="btn btn-outline" id="cancelUserEdit" type="button">Cancel</button>
+            </div>
+            <p class="form-note" id="userMessage">Only admins can create, edit, or delete users.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ─── SETTINGS ──────────────────────────────────────────── -->
+      <section id="settings" class="workspace admin-area route-view is-hidden" data-admin-only>
+        <div class="ws-header">
+          <p class="eyebrow">Administration</p>
+          <h2>Lab settings</h2>
+        </div>
+        <div class="admin-grid">
+          <section class="panel admin-tab active" id="settingsTab">
+            <div class="panel-title">
+              <h3>Laboratory profile</h3>
+              <span>Prototype database</span>
+            </div>
+            <label class="field-label">Laboratory name<input id="settingLabName" value="Sena Lab" /></label>
+            <label class="field-label">Address<input id="settingAddress" value="Tirana, Albania" /></label>
+            <label class="field-label">Phone<input id="settingPhone" value="+355 69 000 0000" /></label>
+            <button class="btn btn-primary magnetic" id="saveSettings" type="button">Save settings</button>
+            <p class="form-note" id="settingsMessage">Settings are saved to the shared database.</p>
+          </section>
+
+          <!-- Change password -->
+          <section class="panel admin-tab" style="max-width:860px;margin-top:0">
+            <div class="panel-title">
+              <h3>Change your password</h3>
+            </div>
+            <form id="changePwForm" style="display:grid;gap:14px">
+              <label class="field-label">New password
+                <input id="newPassword" type="password" required placeholder="At least 8 characters" autocomplete="new-password" />
+              </label>
+              <label class="field-label">Confirm new password
+                <input id="newPassword2" type="password" required placeholder="Repeat new password" autocomplete="new-password" />
+              </label>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Update password</button>
+              </div>
+              <p class="form-note" id="changePwMessage"></p>
+            </form>
+          </section>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Supabase client (must load before config.js and db.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- Fill in your credentials in config.js -->
+    <script src="config.js"></script>
+    <!-- Sena Lab database layer -->
+    <script src="db.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="assets/vendor/qrcode.min.js"></script>
+    <script src="assets/vendor/jspdf.umd.min.js"></script>
+    <script src="app.js"></script>
+    <script src="animations.js"></script>
+    <script src="fluid-hero.js"></script>
+  </body>
+</html>

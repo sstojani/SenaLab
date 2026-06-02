@@ -1,0 +1,19 @@
+# ── Never commit these ──────────────────────────────────────────
+# Claude Code internal settings and skills — not part of the project
+.claude/
+# config.js contains your Supabase anon key — safe to commit BUT
+# if you prefer to keep it private, uncomment the line below.
+# config.js
+
+# Node modules (for Netlify Functions dev)
+node_modules/
+netlify/functions/node_modules/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local dev server log
+*.log

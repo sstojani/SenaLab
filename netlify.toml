@@ -1,0 +1,78 @@
+# ─────────────────────────────────────────────────────────────
+#  Sena Lab — Netlify deployment configuration
+#  Pure static site: no build step, no Node server needed.
+# ─────────────────────────────────────────────────────────────
+
+[build]
+  # Serve straight from the project root — no build command.
+  publish = "."
+  # Netlify will install @supabase/supabase-js for the serverless functions.
+  # No build step needed for the static frontend.
+
+[functions]
+  directory = "netlify/functions"
+
+# ─── Environment variables ───────────────────────────────────────
+# Set these in Netlify dashboard → Site settings → Environment variables:
+#   SUPABASE_URL         — your Supabase project URL
+#   SUPABASE_SERVICE_KEY — service_role key (NEVER in client code)
+# The anon key goes in config.js (safe to be public).
+# ─────────────────────────────────────────────────────────────────
+
+# ─── Security headers (applied to every response) ────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking
+    X-Frame-Options = "DENY"
+
+    # Stop browsers from MIME-sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Force HTTPS for 1 year (Netlify provides the certificate)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+    # Minimal referrer info when linking out
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Disable browser features the site doesn't use
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+    # Content Security Policy
+    # — 'unsafe-inline' needed for CSS custom-property inline styles (--delay, --i)
+    # — cdn.jsdelivr.net for Three.js
+    # — fonts.googleapis.com / fonts.gstatic.com for Figtree + Inter
+    # — api.qrserver.com for QR code images in reports
+    Content-Security-Policy = """
+      default-src 'none';
+      script-src  'self' https://cdn.jsdelivr.net;
+      style-src   'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src    https://fonts.gstatic.com;
+      img-src     'self' data: https://api.qrserver.com;
+      connect-src 'self';
+      frame-ancestors 'none';
+    """
+
+# ─── Block access to internal / tool directories ─────────────
+[[headers]]
+  for = "/.claude/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[redirects]]
+  from   = "/.claude/*"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/server.js"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/*.bat"
+  to     = "/404.html"
+  status = 404
+  force  = true
