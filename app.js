@@ -1169,7 +1169,7 @@ elements.loginForm.addEventListener("submit", async (event) => {
     });
     elements.loginMessage.textContent = locked
       ? `Too many failed attempts. Wait ${LOGIN_LOCKOUT_MS / 1000}s.`
-      : `Incorrect credentials. ${LOGIN_MAX - newCount} attempt${LOGIN_MAX - newCount === 1 ? "" : "s"} remaining.`;
+      : `Error: ${err.message}`;
   } finally {
     if (btn) { btn.classList.remove("loading"); btn.disabled = false; }
   }
