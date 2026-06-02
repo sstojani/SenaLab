@@ -4,10 +4,9 @@
 # ─────────────────────────────────────────────────────────────
 
 [build]
-  # Serve straight from the project root — no build command.
   publish = "."
-  # Netlify will install @supabase/supabase-js for the serverless functions.
-  # No build step needed for the static frontend.
+  # npm install runs automatically because package.json is present.
+  # This makes @supabase/supabase-js available to the serverless functions.
 
 [functions]
   directory = "netlify/functions"

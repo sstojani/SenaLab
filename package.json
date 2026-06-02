@@ -1,0 +1,9 @@
+{
+  "name": "sena-lab",
+  "version": "1.0.0",
+  "description": "Clinical laboratory results portal",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}
