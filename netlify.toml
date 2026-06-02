@@ -69,18 +69,6 @@
   force  = true
 
 [[redirects]]
-  from   = "/config.js"
-  to     = "/404.html"
-  status = 404
-  force  = true
-
-[[redirects]]
-  from   = "/build.js"
-  to     = "/404.html"
-  status = 404
-  force  = true
-
-[[redirects]]
   from   = "/server.js"
   to     = "/404.html"
   status = 404
