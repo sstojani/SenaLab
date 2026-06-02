@@ -10,6 +10,6 @@
    ================================================================ */
 
 window.SENA_CONFIG = {
-  supabaseUrl: 'YOUR_SUPABASE_URL',   // e.g. https://abcdef.supabase.co
-  supabaseKey: 'YOUR_SUPABASE_ANON_KEY',
+  supabaseUrl: 'https://opvmccbndermbafdzitf.supabase.co',
+  supabaseKey: 'sb_publishable_bTyyHv-Du2FPVoTEGpywuQ_LUD3gdPV',
 };
