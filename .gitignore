@@ -1,13 +1,7 @@
-# ── Never commit these ──────────────────────────────────────────
-# Claude Code internal settings and skills — not part of the project
+# Claude Code internal settings — not part of the project
 .claude/
 
-# config.js holds local Supabase credentials.
-# On Netlify, build.js injects them inline into index.html from env vars.
-# Create your own local config.js — it is never committed to git.
-config.js
-
-# Node modules (for Netlify Functions dev)
+# Node modules
 node_modules/
 netlify/functions/node_modules/
 
@@ -16,6 +10,4 @@ netlify/functions/node_modules/
 Thumbs.db
 *.swp
 *.swo
-
-# Local dev server log
 *.log

@@ -5,11 +5,10 @@
 
 [build]
   publish = "."
-  command = "node build.js"
 
-# SUPABASE_URL and SUPABASE_ANON_KEY are public/publishable values —
-# they are designed to appear in client-side code (protected by RLS).
-# Tell Netlify's secrets scanner not to flag them.
+# config.js contains the Supabase anon (publishable) key — safe to commit.
+# Security is enforced by Row-Level Security policies in Supabase, not by
+# hiding this key. The service key lives only in Netlify Functions.
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "SUPABASE_ANON_KEY,SUPABASE_URL"
 
