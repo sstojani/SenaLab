@@ -1,9 +1,11 @@
 # ── Never commit these ──────────────────────────────────────────
 # Claude Code internal settings and skills — not part of the project
 .claude/
-# config.js contains your Supabase anon key — safe to commit BUT
-# if you prefer to keep it private, uncomment the line below.
-# config.js
+
+# config.js holds local Supabase credentials.
+# On Netlify, build.js injects them inline into index.html from env vars.
+# Create your own local config.js — it is never committed to git.
+config.js
 
 # Node modules (for Netlify Functions dev)
 node_modules/
